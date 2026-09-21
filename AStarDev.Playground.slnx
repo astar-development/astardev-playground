@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="AStarDev.Playing.TestsUnit/AStarDev.Playing.TestsUnit.csproj" />
+  <Project Path="AStarDev.Playing/AStarDev.Playing.csproj" />
+</Solution>
