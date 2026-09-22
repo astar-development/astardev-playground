@@ -10,6 +10,15 @@
     <Project Path="nuget-packages/AStarDev.Utilities.TestsUnit/AStarDev.Utilities.TestsUnit.csproj" />
     <Project Path="nuget-packages/AStarDev.Utilities/AStarDev.Utilities.csproj" />
   </Folder>
+  <Folder Name="/nuget-packages/source-generators/">
+    <Project Path="nuget-packages/source-generators/AStarDev.SourceAnalyzers.TestsUnit/AStarDev.SourceAnalyzers.TestsUnit.csproj" />
+    <Project Path="nuget-packages/source-generators/AStarDev.SourceAnalyzers/AStarDev.SourceAnalyzers.csproj" />
+    <Project Path="nuget-packages/source-generators/AStarDev.SourceGeneratorAttributes.TestsUnit/AStarDev.SourceGeneratorAttributes.TestsUnit.csproj" />
+    <Project Path="nuget-packages/source-generators/AStarDev.SourceGeneratorAttributes/AStarDev.SourceGeneratorAttributes.csproj" />
+    <Project Path="nuget-packages/source-generators/AStarDev.SourceGenerators.Sample/AStarDev.SourceGenerators.Sample.csproj" />
+    <Project Path="nuget-packages/source-generators/AStarDev.SourceGenerators.TestsUnit/AStarDev.SourceGenerators.TestsUnit.csproj" />
+    <Project Path="nuget-packages/source-generators/AStarDev.SourceGenerators/AStarDev.SourceGenerators.csproj" />
+  </Folder>
   <Project Path="AStarDev.Playing.TestsUnit/AStarDev.Playing.TestsUnit.csproj" />
   <Project Path="AStarDev.Playing/AStarDev.Playing.csproj" />
 </Solution>
