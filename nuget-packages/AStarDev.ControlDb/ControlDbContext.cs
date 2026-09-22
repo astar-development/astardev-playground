@@ -2,7 +2,7 @@
 
 namespace AStarDev.ControlDb;
 
-public class ControlDbContext
+public class ControlDbContext : DbContext
 {
 
 }
