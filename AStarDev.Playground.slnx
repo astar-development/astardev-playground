@@ -1,4 +1,15 @@
 <Solution>
+  <Folder Name="/nuget-packages/">
+    <Project Path="nuget-packages/AStarDev.ControlDb.Persistence.TestsIntegration/AStarDev.ControlDb.Persistence.TestsIntegration.csproj" />
+    <Project Path="nuget-packages/AStarDev.ControlDb.Persistence.TestsUnit/AStarDev.ControlDb.Persistence.TestsUnit.csproj" />
+    <Project Path="nuget-packages/AStarDev.ControlDb.Persistence/AStarDev.ControlDb.Persistence.csproj" />
+    <Project Path="nuget-packages/AStarDev.ControlDb.TestsUnit/AStarDev.ControlDb.TestsUnit.csproj" />
+    <Project Path="nuget-packages/AStarDev.ControlDb/AStarDev.ControlDb.csproj" />
+    <Project Path="nuget-packages/AStarDev.Functional.TestsUnit/AStarDev.Functional.TestsUnit.csproj" />
+    <Project Path="nuget-packages/AStarDev.Functional/AStarDev.Functional.csproj" />
+    <Project Path="nuget-packages/AStarDev.Utilities.TestsUnit/AStarDev.Utilities.TestsUnit.csproj" />
+    <Project Path="nuget-packages/AStarDev.Utilities/AStarDev.Utilities.csproj" />
+  </Folder>
   <Project Path="AStarDev.Playing.TestsUnit/AStarDev.Playing.TestsUnit.csproj" />
   <Project Path="AStarDev.Playing/AStarDev.Playing.csproj" />
 </Solution>
