@@ -28,7 +28,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../AStarDev.ControlDb.Persistence.TestsUnit/AStarDev.ControlDb.Persistence.TestsUnit.csproj" />
+    <ProjectReference Include="../AStarDev.ControlDb.Persistence/AStarDev.ControlDb.Persistence.csproj" />
+    <ProjectReference Include="../AStarDev.Utilities/AStarDev.Utilities.csproj" />
   </ItemGroup>
 
 </Project>
