@@ -2,9 +2,13 @@ using Domain = AStarDev.ControlDb;
 
 namespace AStarDev.ControlDb.Persistence;
 
-/// <summary>Converts the immutable domain <see cref="Domain.ScrapeConfiguration"/> into the mutable EF Core <see cref="ScrapeConfiguration"/> entity.</summary>
+/// <summary>Converts between the immutable domain <see cref="Domain.ScrapeConfiguration"/> and the mutable EF Core <see cref="ScrapeConfiguration"/> entity.</summary>
 public static class ScrapeConfigurationMappings
 {
+    /// <summary>Creates an immutable domain model from the entity.</summary>
+    public static Domain.ScrapeConfiguration ToDomain(this ScrapeConfiguration entity)
+        => new(new Domain.ScrapeConfigurationId(entity.Id.Value), entity.SiteName, entity.SiteUrl, entity.SearchCategoryPrefix, entity.SearchCategorySuffix, entity.TopWallpapers, entity.HotWallpapers, entity.Username, entity.HashedPassword);
+
     /// <summary>Creates a new entity from the domain model.</summary>
     public static ScrapeConfiguration ToEntity(this Domain.ScrapeConfiguration scrapeConfiguration)
         => new ScrapeConfiguration { Id = new ScrapeConfigurationId(scrapeConfiguration.Id.Value) }.UpdateFrom(scrapeConfiguration);
