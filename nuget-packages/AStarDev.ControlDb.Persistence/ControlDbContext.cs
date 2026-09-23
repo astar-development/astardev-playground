@@ -20,4 +20,10 @@ public class ControlDbContext : DbContext
     {
         if (!optionsBuilder.IsConfigured) optionsBuilder.UseSqlite("Data Source=:memory:");
     }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ControlDbContext).Assembly);
+    }
 }
