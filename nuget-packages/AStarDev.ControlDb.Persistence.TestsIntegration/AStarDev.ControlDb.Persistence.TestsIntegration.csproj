@@ -6,6 +6,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net10.0</TargetFramework>
     <TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
+    <NoWarn>$(NoWarn);IDE1006</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,7 +28,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../AStarDev.ControlDb.Persistence.TestsUnit/AStarDev.ControlDb.Persistence.TestsUnit.csproj" />
+    <ProjectReference Include="../AStarDev.ControlDb.Persistence/AStarDev.ControlDb.Persistence.csproj" />
+    <ProjectReference Include="../AStarDev.Utilities/AStarDev.Utilities.csproj" />
   </ItemGroup>
 
 </Project>
