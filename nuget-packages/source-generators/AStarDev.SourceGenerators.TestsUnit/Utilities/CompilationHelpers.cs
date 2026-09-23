@@ -5,16 +5,17 @@ namespace AStarDev.SourceGenerators.TestsUnit.Utilities;
 
 internal static class CompilationHelpers
 {
-    private const string StrongIdAttributeSource = """
-                                                   using System;
-                                                   namespace AStarDev.SourceGeneratorAttributes {
-                                                       public sealed class StrongIdAttribute(Type? idType = null) : Attribute
-                                                       {
-                                                           /// <summary>The type of the ID property (e.g., typeof(Guid), typeof(int)).</summary>
-                                                           public Type IdType { get; } = idType ?? typeof(Guid);
-                                                       }
-                                                   }
-                                                   """;
+    private const string StrongTypeAttributeSource = """
+                                                     using System;
+                                                     namespace AStarDev.SourceGeneratorAttributes {
+                                                         [AttributeUsage(AttributeTargets.Struct | AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
+                                                         public sealed class StrongTypeAttribute(Type? underlyingType = null) : Attribute
+                                                         {
+                                                             /// <summary>The type of the wrapped Value property (e.g., typeof(Guid), typeof(int)).</summary>
+                                                             public Type UnderlyingType { get; } = underlyingType ?? typeof(Guid);
+                                                         }
+                                                     }
+                                                     """;
     private const string AutoRegisterOptionsAttributeSource = """
                                                               namespace AStarDev.SourceGeneratorAttributes;
 
@@ -38,7 +39,7 @@ internal static class CompilationHelpers
     public static CSharpCompilation CreateCompilation(string input)
         => CSharpCompilation.Create("TestAssembly",
             [
-                CSharpSyntaxTree.ParseText(StrongIdAttributeSource),
+                CSharpSyntaxTree.ParseText(StrongTypeAttributeSource),
                 CSharpSyntaxTree.ParseText(AutoRegisterOptionsAttributeSource),
                 CSharpSyntaxTree.ParseText(input)
             ],

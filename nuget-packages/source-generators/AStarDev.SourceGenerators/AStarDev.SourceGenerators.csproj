@@ -14,11 +14,12 @@
         <NoWarn>$(NoWarn);NU5128;NU5100</NoWarn>
         <IncludeSymbols>false</IncludeSymbols>
         <Description>Source generators and supporting attribute types for AStarDev projects.</Description>
-        <PackageTags>source-generator;strongid;attributes;astartools</PackageTags>
+        <PackageTags>source-generator;strongtype;attributes;astartools</PackageTags>
         <PackageProjectUrl>https://github.com/astar-development/astar-dev-mono/tree/main/packages/source-generators</PackageProjectUrl>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 		<PackageReleaseNotes>
+        v0.3.0 feat!: replace [StrongId] with [StrongType] (breaking); supports partial record classes as well as record structs; analyzer diagnostic ASTARID001 replaced by ASTARTYPE001
         v0.2.0 feat: classify AutoRegisterService by architectural layer
         v0.1.14 chore: solution cleanup - namespaces, XML doc formatting, test folder alignment
 			v0.1.13 - Bundle AStarDev.SourceAnalyzers.dll (ASTAROPT002) into this package so consumers of AStarDev.SourceGenerators receive its diagnostics without a separate package reference.
