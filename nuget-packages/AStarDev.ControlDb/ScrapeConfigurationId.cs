@@ -2,5 +2,5 @@ using AStarDev.SourceGeneratorAttributes;
 
 namespace AStarDev.ControlDb;
 
-[StrongId]
+[StrongType]
 public partial record struct ScrapeConfigurationId;

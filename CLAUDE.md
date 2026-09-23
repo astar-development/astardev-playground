@@ -21,16 +21,17 @@ Core commands, conventions, test style in AGENTS.md (imported below); this file 
 
 ### Source generators (`nuget-packages/source-generators/`)
 
-- `AStarDev.SourceGeneratorAttributes`: marker attrs (`[StrongId]`, `[AutoRegisterService]` with `Layer`/`ServiceLifetime`, `[AutoRegisterOptions]`, `[AutoRegisterEndpoint]`).
-- `AStarDev.SourceGenerators` (netstandard2.0, Roslyn component): generators in `StrongIdCodeGeneration/`, `ServiceRegistrationGeneration/`, `OptionsBindingGeneration/`. Custom MSBuild targets copy Attributes + SourceAnalyzers DLLs into output, pack all under `analyzers/dotnet/cs` → one package ships attrs, generators, diagnostics. Release notes in `<PackageReleaseNotes>` in csproj.
-- `AStarDev.SourceAnalyzers`: diagnostics for correct attr usage (e.g. `[StrongId]` types must be `partial`). Track new diagnostic IDs in `AnalyzerReleases.Shipped.md`.
+- `AStarDev.SourceGeneratorAttributes`: marker attrs (`[StrongType]`, `[AutoRegisterService]` with `Layer`/`ServiceLifetime`, `[AutoRegisterOptions]`, `[AutoRegisterEndpoint]`).
+- `AStarDev.SourceGenerators` (netstandard2.0, Roslyn component): generators in `StrongTypeCodeGeneration/`, `ServiceRegistrationGeneration/`, `OptionsBindingGeneration/`. Custom MSBuild targets copy Attributes + SourceAnalyzers DLLs into output, pack all under `analyzers/dotnet/cs` → one package ships attrs, generators, diagnostics. Release notes in `<PackageReleaseNotes>` in csproj.
+- `AStarDev.SourceAnalyzers`: diagnostics for correct attr usage (e.g. `[StrongType]` records must be `partial`). Track new diagnostic IDs in `AnalyzerReleases.Shipped.md`.
+- `[StrongType]` works on `partial record struct` (generated `readonly`) and `partial record`/`record class` (generated `sealed`); plain classes/structs silently skipped.
 - Generator tests build in-memory compilations; `TestsUnit/Utilities/CompilationHelpers.cs` inlines attr source → update when attr shapes change.
 - Consuming generators in-repo via project reference (not NuGet) needs `AddGeneratorAnalyzerRefs` target pattern from `AStarDev.ControlDb.Persistence.csproj`.
 
 ### ControlDb (in progress on the current branch)
 
-- `AStarDev.ControlDb.Persistence`: EF Core + SQLite `ControlDbContext`. Entity configs in `Configurations/` picked up by `ApplyConfigurationsFromAssembly`. IDs = `[StrongId] partial record struct` types, extended via C# 14 `extension(...)` blocks (see `ScrapeConfigIdHelpers.cs`: adds `Empty`, `Create` (v7 GUID)).
-- Immutable domain records live in `AStarDev.ControlDb`; mutable EF entities (same type names, own StrongId types) in `.Persistence`. Convert via `ScrapeConfigurationMappings`: `ToEntity()` (insert), `UpdateFrom(domain)` (copy onto tracked entity so EF saves changes, keeps `Id`), `ToDomain()`. Alias domain namespace (`using Domain = AStarDev.ControlDb;`) to disambiguate.
+- `AStarDev.ControlDb.Persistence`: EF Core + SQLite `ControlDbContext`. Entity configs in `Configurations/` picked up by `ApplyConfigurationsFromAssembly`. IDs = `[StrongType] partial record struct` types, extended via C# 14 `extension(...)` blocks (see `ScrapeConfigIdHelpers.cs`: adds `Empty`, `Create` (v7 GUID)).
+- Immutable domain records live in `AStarDev.ControlDb`; mutable EF entities (same type names, own StrongType ID types) in `.Persistence`. Convert via `ScrapeConfigurationMappings`: `ToEntity()` (insert), `UpdateFrom(domain)` (copy onto tracked entity so EF saves changes, keeps `Id`), `ToDomain()`. Alias domain namespace (`using Domain = AStarDev.ControlDb;`) to disambiguate.
 - Two C# 14 `extension(...)` blocks in one class whose receiver types share a name (domain vs entity) trigger CA1708 → use classic `this` extension methods.
 - Integration tests: shared in-memory `SqliteConnection` per test class, call `EnsureCreated()`, build entities via `TestFactories/`.
 

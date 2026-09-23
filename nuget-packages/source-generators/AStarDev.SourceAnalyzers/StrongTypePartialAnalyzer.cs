@@ -7,23 +7,23 @@ using Microsoft.CodeAnalysis.Diagnostics;
 namespace AStarDev.SourceAnalyzers;
 
 /// <summary>
-/// Analyzer that enforces [StrongId] record structs are declared readonly and partial, matching
-/// StrongIdGenerator's syntax predicate. Without both modifiers, the generator silently skips the
+/// Analyzer that enforces [StrongType] record structs and record classes are declared partial, matching
+/// StrongTypeGenerator's syntax predicate. Without the modifier, the generator silently skips the
 /// type and no members are generated.
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class StrongIdPartialAnalyzer : DiagnosticAnalyzer
+public sealed class StrongTypePartialAnalyzer : DiagnosticAnalyzer
 {
     private static readonly DiagnosticDescriptor _rule = new(
         DiagnosticId,
-        "StrongId record struct must be readonly and partial",
-        "Record struct '{0}' decorated with [StrongId] must be declared partial, otherwise StrongIdGenerator silently skips it and no members are generated",
+        "StrongType record must be partial",
+        "Record '{0}' decorated with [StrongType] must be declared partial, otherwise StrongTypeGenerator silently skips it and no members are generated",
         "AStarDev.SourceAnalyzers",
         DiagnosticSeverity.Error,
         isEnabledByDefault: true);
 
-    /// <summary>The diagnostic ID for a [StrongId] record struct missing partial.</summary>
-    public const string DiagnosticId = "ASTARID001";
+    /// <summary>The diagnostic ID for a [StrongType] record struct or record class missing partial.</summary>
+    public const string DiagnosticId = "ASTARTYPE001";
 
     /// <inheritdoc/>
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [_rule];
@@ -35,7 +35,7 @@ public sealed class StrongIdPartialAnalyzer : DiagnosticAnalyzer
 
         context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
         context.EnableConcurrentExecution();
-        context.RegisterSyntaxNodeAction(AnalyzeType, SyntaxKind.RecordStructDeclaration);
+        context.RegisterSyntaxNodeAction(AnalyzeType, SyntaxKind.RecordStructDeclaration, SyntaxKind.RecordDeclaration);
     }
 
     private static void AnalyzeType(SyntaxNodeAnalysisContext context)
@@ -47,7 +47,7 @@ public sealed class StrongIdPartialAnalyzer : DiagnosticAnalyzer
 
         if (!Enumerable.Any(symbol.GetAttributes(),
                 attr => attr.AttributeClass?.ToDisplayString() ==
-                        "AStarDev.SourceGeneratorAttributes.StrongIdAttribute"))
+                        "AStarDev.SourceGeneratorAttributes.StrongTypeAttribute"))
             return;
 
         bool isPartial = recordDecl.Modifiers.Any(m => m.IsKind(SyntaxKind.PartialKeyword));
