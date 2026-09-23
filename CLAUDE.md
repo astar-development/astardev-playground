@@ -39,3 +39,7 @@ Core commands, conventions, test style in AGENTS.md (imported below); this file 
 
 - Snapshot tests use Shouldly `ShouldMatchApproved()`: mismatch writes `*.received.txt` beside test; approve by renaming to `*.approved.txt`. Commit `.approved.txt`; never commit `.received.txt`.
 - TDD commit history expected: commit failing test (`test:` or `[RED]`) before implementation.
+
+## Pull requests
+
+- Create PRs with auto-merge enabled: after `gh pr create`, run `gh pr merge <PR#> --auto --squash` (or pass the merge method the repo uses).
