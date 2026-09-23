@@ -1,1 +1,0 @@
-{"Id":{"Value":"14e71cba-6ac8-44f7-8b1d-b4c8580856ae"},"SiteName":"Mock Site Name","SiteUrl":"https://example.com","SearchCategoryPrefix":"Mock Search Category Prefix","SearchCategorySuffix":"Mock Search Category Suffix","TopWallpapers":"Mock Top Wallpapers","HotWallpapers":"Mock Hot Wallpapers","Username":"Mock Username","HashedPassword":"Mock Hashed Password"}
