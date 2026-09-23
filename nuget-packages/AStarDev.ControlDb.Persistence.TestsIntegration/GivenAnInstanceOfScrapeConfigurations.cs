@@ -92,5 +92,26 @@ public sealed class GivenAnInstanceOfScrapeConfigurations : IDisposable
         result.HashedPassword.ShouldBe("Updated Hashed Password");
     }
 
+    [Fact]
+    public void when_loading_a_persisted_entity_then_it_converts_to_a_domain_model()
+    {
+        ScrapeConfiguration entity = ScrapeConfigurationFactory.Create();
+        entity.Id = ScrapeConfigurationId.Create;
+        using (var context = new ControlDbContext(options))
+        {
+            context.ScrapeConfigurations.Add(entity);
+            context.SaveChanges();
+        }
+
+        using var newContext = new ControlDbContext(options);
+        Domain.ScrapeConfiguration result = newContext.ScrapeConfigurations.Single().ToDomain();
+
+        result.Id.Value.ShouldBe(entity.Id.Value);
+        result.SiteName.ShouldBe("Mock Site Name");
+        result.HotWallpapers.ShouldBe("Mock Hot Wallpapers");
+        result.Username.ShouldBe("Mock Username");
+        result.HashedPassword.ShouldBe("Mock Hashed Password");
+    }
+
     public void Dispose() => connection.Dispose();
 }
