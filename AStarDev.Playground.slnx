@@ -10,6 +10,12 @@
     <Project Path="nuget-packages/AStarDev.Utilities.TestsUnit/AStarDev.Utilities.TestsUnit.csproj" />
     <Project Path="nuget-packages/AStarDev.Utilities/AStarDev.Utilities.csproj" />
   </Folder>
+  <Folder Name="/nuget-packages/logging/">
+    <Project Path="nuget-packages/logging/AStarDev.LoggingExtensions.TestsUnit/AStarDev.LoggingExtensions.TestsUnit.csproj" />
+    <Project Path="nuget-packages/logging/AStarDev.LoggingExtensions/AStarDev.LoggingExtensions.csproj" />
+    <Project Path="nuget-packages/logging/AStarDev.LoggingOTel.TestsUnit/AStarDev.LoggingOTel.TestsUnit.csproj" />
+    <Project Path="nuget-packages/logging/AStarDev.LoggingOTel/AStarDev.LoggingOTel.csproj" />
+  </Folder>
   <Folder Name="/nuget-packages/source-generators/">
     <Project Path="nuget-packages/source-generators/AStarDev.SourceAnalyzers.TestsUnit/AStarDev.SourceAnalyzers.TestsUnit.csproj" />
     <Project Path="nuget-packages/source-generators/AStarDev.SourceAnalyzers/AStarDev.SourceAnalyzers.csproj" />
