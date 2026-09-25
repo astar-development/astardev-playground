@@ -1,3 +1,4 @@
+using AStarDev.LoggingExtensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -7,7 +8,7 @@ namespace AStarDev.LoggingExtensions.TestsUnit;
 public sealed class GivenLoggingExtensions
 {
     [Fact]
-    public void when_add_o_tel_logging_is_called_on_a_web_application_builder_then_it_returns_the_same_builder_for_chaining()
+    public void when_add_oTel_logging_is_called_on_a_web_application_builder_then_it_returns_the_same_builder_for_chaining()
     {
         var builder = WebApplication.CreateBuilder();
 
@@ -17,7 +18,7 @@ public sealed class GivenLoggingExtensions
     }
 
     [Fact]
-    public void when_add_o_tel_logging_is_called_on_a_web_application_builder_then_a_usable_logger_is_produced()
+    public void when_add_oTel_logging_is_called_on_a_web_application_builder_then_a_usable_logger_is_produced()
     {
         var builder = WebApplication.CreateBuilder();
         _ = builder.AddOTelLogging();
@@ -29,7 +30,7 @@ public sealed class GivenLoggingExtensions
     }
 
     [Fact]
-    public void when_add_o_tel_logging_is_called_on_a_web_application_builder_then_i_logger_astar_resolves_to_a_star_logger()
+    public void when_add_oTel_logging_is_called_on_a_web_application_builder_then_i_logger_astar_resolves_to_a_star_logger()
     {
         var builder = WebApplication.CreateBuilder();
         _ = builder.AddOTelLogging();
@@ -41,7 +42,7 @@ public sealed class GivenLoggingExtensions
     }
 
     [Fact]
-    public void when_add_o_tel_logging_is_called_on_a_web_application_builder_then_log_messages_can_be_written_without_throwing()
+    public void when_add_oTel_logging_is_called_on_a_web_application_builder_then_log_messages_can_be_written_without_throwing()
     {
         var builder = WebApplication.CreateBuilder();
         _ = builder.AddOTelLogging();
@@ -54,7 +55,7 @@ public sealed class GivenLoggingExtensions
     }
 
     [Fact]
-    public void when_add_o_tel_logging_is_called_on_a_host_application_builder_then_it_returns_the_same_builder_for_chaining()
+    public void when_add_oTel_logging_is_called_on_a_host_application_builder_then_it_returns_the_same_builder_for_chaining()
     {
         var builder = Host.CreateApplicationBuilder();
 
@@ -64,7 +65,7 @@ public sealed class GivenLoggingExtensions
     }
 
     [Fact]
-    public void when_add_o_tel_logging_is_called_on_a_host_application_builder_then_a_usable_logger_is_produced()
+    public void when_add_oTel_logging_is_called_on_a_host_application_builder_then_a_usable_logger_is_produced()
     {
         var builder = Host.CreateApplicationBuilder();
         _ = builder.AddOTelLogging();
@@ -76,7 +77,7 @@ public sealed class GivenLoggingExtensions
     }
 
     [Fact]
-    public void when_add_o_tel_logging_is_called_on_a_host_application_builder_then_log_messages_can_be_written_without_throwing()
+    public void when_add_oTel_logging_is_called_on_a_host_application_builder_then_log_messages_can_be_written_without_throwing()
     {
         var builder = Host.CreateApplicationBuilder();
         _ = builder.AddOTelLogging();
@@ -89,7 +90,7 @@ public sealed class GivenLoggingExtensions
     }
 
     [Fact]
-    public void when_add_o_tel_logging_is_called_with_an_external_settings_file_then_it_is_merged_into_configuration()
+    public void when_add_oTel_logging_is_called_with_an_external_settings_file_then_it_is_merged_into_configuration()
     {
         var builder = WebApplication.CreateBuilder();
 
@@ -99,7 +100,7 @@ public sealed class GivenLoggingExtensions
     }
 
     [Fact]
-    public void when_add_o_tel_logging_is_called_with_no_external_settings_file_then_configuration_is_unaffected()
+    public void when_add_oTel_logging_is_called_with_no_external_settings_file_then_configuration_is_unaffected()
     {
         var builder = WebApplication.CreateBuilder();
 
@@ -109,7 +110,7 @@ public sealed class GivenLoggingExtensions
     }
 
     [Fact]
-    public async Task when_add_o_tel_logging_is_called_on_a_web_application_builder_with_no_connection_string_then_starting_the_host_does_not_throw()
+    public async Task when_add_oTel_logging_is_called_on_a_web_application_builder_with_no_connection_string_then_starting_the_host_does_not_throw()
     {
         var builder = WebApplication.CreateBuilder();
         _ = builder.AddOTelLogging();
@@ -125,7 +126,7 @@ public sealed class GivenLoggingExtensions
     }
 
     [Fact]
-    public async Task when_add_o_tel_logging_is_called_on_a_host_application_builder_with_no_connection_string_then_starting_the_host_does_not_throw()
+    public async Task when_add_oTel_logging_is_called_on_a_host_application_builder_with_no_connection_string_then_starting_the_host_does_not_throw()
     {
         var builder = Host.CreateApplicationBuilder();
         _ = builder.AddOTelLogging();

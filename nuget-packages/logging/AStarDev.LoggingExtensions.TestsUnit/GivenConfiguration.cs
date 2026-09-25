@@ -31,7 +31,7 @@ public sealed class GivenConfiguration
 
     [Theory]
     [InlineData("astar-logging-settings.json")]
-    [InlineData("ASTAR-LOGGING-SETTINGS.JSON")] // Case-insensitivity check
+    [InlineData("ASTAR-LOGGING-SETTINGS.JSON")]
     public void MatchContentRegardlessOfCase_ForExternalSettingsFile(string comparisonValue)
     {
         string result = Configuration.ExternalSettingsFile;

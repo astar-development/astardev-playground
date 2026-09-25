@@ -7,14 +7,17 @@ public sealed class GivenAScrapeConfigurationDomainModel
 {
     private static readonly Domain.ScrapeConfiguration DomainModel = new(
         new Domain.ScrapeConfigurationId(Guid.CreateVersion7()),
-        "Domain Site Name",
-        "https://domain.example.com",
-        "Domain Search Category Prefix",
-        "Domain Search Category Suffix",
-        "Domain Top Wallpapers",
-        "Domain Hot Wallpapers",
-        "Domain Username",
-        "Domain Hashed Password");
+        new Domain.ScrapeSettings(
+            new Domain.SiteName("Domain Site Name"),
+            new Uri("https://domain.example.com"),
+            new Domain.SearchCategoryPrefix("Domain Search Category Prefix"),
+            new Domain.SearchCategorySuffix("Domain Search Category Suffix"),
+            new Domain.TopWallpapers("Domain Top Wallpapers"),
+            new Domain.HotWallpapers("Domain Hot Wallpapers"),
+            new Domain.Username("Domain Username"),
+            new Domain.HashedPassword("Domain Hashed Password")
+        )
+    );
 
     [Fact]
     public void when_converting_to_an_entity_then_the_id_value_is_preserved()
@@ -29,12 +32,14 @@ public sealed class GivenAScrapeConfigurationDomainModel
     {
         ScrapeConfiguration entity = DomainModel.ToEntity();
 
-        entity.SiteName.ShouldBe("Domain Site Name");
-        entity.SiteUrl.ShouldBe("https://domain.example.com");
-        entity.SearchCategoryPrefix.ShouldBe("Domain Search Category Prefix");
-        entity.SearchCategorySuffix.ShouldBe("Domain Search Category Suffix");
-        entity.TopWallpapers.ShouldBe("Domain Top Wallpapers");
-        entity.HotWallpapers.ShouldBe("Domain Hot Wallpapers");
+        entity.ScrapeSettings.SiteName.Value.ShouldBe("Domain Site Name");
+        entity.ScrapeSettings.SiteUrl.AbsoluteUri.ShouldBe("https://domain.example.com/");
+        entity.ScrapeSettings.SearchCategoryPrefix.Value.ShouldBe("Domain Search Category Prefix");
+        entity.ScrapeSettings.SearchCategorySuffix.Value.ShouldBe("Domain Search Category Suffix");
+        entity.ScrapeSettings.TopWallpapers.Value.ShouldBe("Domain Top Wallpapers");
+        entity.ScrapeSettings.HotWallpapers.Value.ShouldBe("Domain Hot Wallpapers");
+        entity.ScrapeSettings.Username.Value.ShouldBe("Domain Username");
+        entity.ScrapeSettings.HashedPassword.Value.ShouldBe("Domain Hashed Password");
     }
 
     [Fact]
@@ -42,8 +47,8 @@ public sealed class GivenAScrapeConfigurationDomainModel
     {
         ScrapeConfiguration entity = DomainModel.ToEntity();
 
-        entity.Username.ShouldBe("Domain Username");
-        entity.HashedPassword.ShouldBe("Domain Hashed Password");
+        entity.ScrapeSettings.HashedPassword.Value.ShouldBe("Domain Hashed Password");
+        entity.ScrapeSettings.HashedPassword.Value.ShouldBe("Domain Hashed Password");
     }
 
     [Fact]
@@ -63,14 +68,14 @@ public sealed class GivenAScrapeConfigurationDomainModel
 
         existing.UpdateFrom(DomainModel);
 
-        existing.SiteName.ShouldBe("Domain Site Name");
-        existing.SiteUrl.ShouldBe("https://domain.example.com");
-        existing.SearchCategoryPrefix.ShouldBe("Domain Search Category Prefix");
-        existing.SearchCategorySuffix.ShouldBe("Domain Search Category Suffix");
-        existing.TopWallpapers.ShouldBe("Domain Top Wallpapers");
-        existing.HotWallpapers.ShouldBe("Domain Hot Wallpapers");
-        existing.Username.ShouldBe("Domain Username");
-        existing.HashedPassword.ShouldBe("Domain Hashed Password");
+        existing.ScrapeSettings.SiteName.Value.ShouldBe("Domain Site Name");
+        existing.ScrapeSettings.SiteUrl.AbsoluteUri.ShouldBe("https://domain.example.com/");
+        existing.ScrapeSettings.SearchCategoryPrefix.Value.ShouldBe("Domain Search Category Prefix");
+        existing.ScrapeSettings.SearchCategorySuffix.Value.ShouldBe("Domain Search Category Suffix");
+        existing.ScrapeSettings.TopWallpapers.Value.ShouldBe("Domain Top Wallpapers");
+        existing.ScrapeSettings.HotWallpapers.Value.ShouldBe("Domain Hot Wallpapers");
+        existing.ScrapeSettings.Username.Value.ShouldBe("Domain Username");
+        existing.ScrapeSettings.HashedPassword.Value.ShouldBe("Domain Hashed Password");
     }
 
     [Fact]
