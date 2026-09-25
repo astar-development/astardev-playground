@@ -9,13 +9,13 @@ public sealed class GivenAScrapeConfigurationDomainModel
     {
         ScrapeConfiguration entity = ScrapeConfigurationFactory.Create();
 
-        entity.SiteName.ShouldBe("Mock Site Name");
-        entity.SiteUrl.ShouldBe("https://example.com");
-        entity.SearchCategoryPrefix.ShouldBe("Mock Search Category Prefix");
-        entity.SearchCategorySuffix.ShouldBe("Mock Search Category Suffix");
-        entity.TopWallpapers.ShouldBe("Mock Top Wallpapers");
-        entity.HotWallpapers.ShouldBe("Mock Hot Wallpapers");
-        entity.Username.ShouldBe("Mock Username");
-        entity.HashedPassword.ShouldBe("Mock Hashed Password");
+        entity.ScrapeSettings.SiteName.Value.ShouldBe("Mock Site Name");
+        entity.ScrapeSettings.SiteUrl.AbsoluteUri.ShouldBe("https://example.com/");
+        entity.ScrapeSettings.SearchCategoryPrefix.Value.ShouldBe("Mock Search Category Prefix");
+        entity.ScrapeSettings.SearchCategorySuffix.Value.ShouldBe("Mock Search Category Suffix");
+        entity.ScrapeSettings.TopWallpapers.Value.ShouldBe("Mock Top Wallpapers");
+        entity.ScrapeSettings.HotWallpapers.Value.ShouldBe("Mock Hot Wallpapers");
+        entity.ScrapeSettings.Username.Value.ShouldBe("Mock Username");
+        entity.ScrapeSettings.HashedPassword.Value.ShouldBe("Mock Hashed Password");
     }
 }

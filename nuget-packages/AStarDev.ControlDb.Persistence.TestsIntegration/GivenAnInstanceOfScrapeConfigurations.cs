@@ -33,20 +33,20 @@ public sealed class GivenAnInstanceOfScrapeConfigurations : IDisposable
         var result = newContext.ScrapeConfigurations.First();
 
         result.Id.ShouldBeAssignableTo<ScrapeConfigurationId>();
-        result.HashedPassword.ShouldBe("Mock Hashed Password");
-        result.HotWallpapers.ShouldBe("Mock Hot Wallpapers");
-        result.Username.ShouldBe("Mock Username");
-        result.TopWallpapers.ShouldBe("Mock Top Wallpapers");
-        result.SearchCategoryPrefix.ShouldBe("Mock Search Category Prefix");
-        result.SearchCategorySuffix.ShouldBe("Mock Search Category Suffix");
-        result.SiteName.ShouldBe("Mock Site Name");
-        result.SiteUrl.ShouldBe("https://example.com");
+        result.ScrapeSettings.HashedPassword.Value.ShouldBe("Mock Hashed Password");
+        result.ScrapeSettings.HotWallpapers.Value.ShouldBe("Mock Hot Wallpapers");
+        result.ScrapeSettings.Username.Value.ShouldBe("Mock Username");
+        result.ScrapeSettings.TopWallpapers.Value.ShouldBe("Mock Top Wallpapers");
+        result.ScrapeSettings.SearchCategoryPrefix.Value.ShouldBe("Mock Search Category Prefix");
+        result.ScrapeSettings.SearchCategorySuffix.Value.ShouldBe("Mock Search Category Suffix");
+        result.ScrapeSettings.SiteName.Value.ShouldBe("Mock Site Name");
+        result.ScrapeSettings.SiteUrl.AbsoluteUri.ShouldBe("https://example.com/");
     }
 
     [Fact]
     public void when_saving_a_converted_domain_model_then_it_is_persisted()
     {
-        var domainModel = new Domain.ScrapeConfiguration(new Domain.ScrapeConfigurationId(Guid.CreateVersion7()), "Domain Site Name", "https://domain.example.com", "Domain Prefix", "Domain Suffix", "Domain Top", "Domain Hot", "Domain Username", "Domain Hashed Password");
+        var domainModel = new Domain.ScrapeConfiguration(new Domain.ScrapeConfigurationId(Guid.CreateVersion7()), new Domain.ScrapeSettings("Domain Site Name", new Uri("https://domain.example.com"), "Domain Prefix", "Domain Suffix", "Domain Top", "Domain Hot", "Domain Username", "Domain Hashed Password"));
 
         using (var context = new ControlDbContext(options))
         {
@@ -58,10 +58,10 @@ public sealed class GivenAnInstanceOfScrapeConfigurations : IDisposable
         var result = newContext.ScrapeConfigurations.Single();
 
         result.Id.Value.ShouldBe(domainModel.Id.Value);
-        result.SiteName.ShouldBe("Domain Site Name");
-        result.HotWallpapers.ShouldBe("Domain Hot");
-        result.Username.ShouldBe("Domain Username");
-        result.HashedPassword.ShouldBe("Domain Hashed Password");
+        result.ScrapeSettings.SiteName.Value.ShouldBe("Domain Site Name");
+        result.ScrapeSettings.HotWallpapers.Value.ShouldBe("Domain Hot");
+        result.ScrapeSettings.Username.Value.ShouldBe("Domain Username");
+        result.ScrapeSettings.HashedPassword.Value.ShouldBe("Domain Hashed Password");
     }
 
     [Fact]
@@ -75,7 +75,7 @@ public sealed class GivenAnInstanceOfScrapeConfigurations : IDisposable
             context.SaveChanges();
         }
 
-        var domainModel = new Domain.ScrapeConfiguration(new Domain.ScrapeConfigurationId(entity.Id.Value), "Updated Site Name", "https://updated.example.com", "Updated Prefix", "Updated Suffix", "Updated Top", "Updated Hot", "Updated Username", "Updated Hashed Password");
+        var domainModel = new Domain.ScrapeConfiguration(new Domain.ScrapeConfigurationId(entity.Id.Value), new Domain.ScrapeSettings("Updated Site Name", new Uri("https://updated.example.com"), "Updated Prefix", "Updated Suffix", "Updated Top", "Updated Hot", "Updated Username", "Updated Hashed Password"));
         using (var context = new ControlDbContext(options))
         {
             context.ScrapeConfigurations.Single(sc => sc.Id == entity.Id).UpdateFrom(domainModel);
@@ -85,11 +85,11 @@ public sealed class GivenAnInstanceOfScrapeConfigurations : IDisposable
         using var newContext = new ControlDbContext(options);
         var result = newContext.ScrapeConfigurations.Single();
 
-        result.SiteName.ShouldBe("Updated Site Name");
-        result.SiteUrl.ShouldBe("https://updated.example.com");
-        result.TopWallpapers.ShouldBe("Updated Top");
-        result.Username.ShouldBe("Updated Username");
-        result.HashedPassword.ShouldBe("Updated Hashed Password");
+        result.ScrapeSettings.SiteName.Value.ShouldBe("Updated Site Name");
+        result.ScrapeSettings.SiteUrl.AbsoluteUri.ShouldBe("https://updated.example.com/");
+        result.ScrapeSettings.TopWallpapers.Value.ShouldBe("Updated Top");
+        result.ScrapeSettings.Username.Value.ShouldBe("Updated Username");
+        result.ScrapeSettings.HashedPassword.Value.ShouldBe("Updated Hashed Password");
     }
 
     [Fact]
@@ -107,10 +107,10 @@ public sealed class GivenAnInstanceOfScrapeConfigurations : IDisposable
         Domain.ScrapeConfiguration result = newContext.ScrapeConfigurations.Single().ToDomain();
 
         result.Id.Value.ShouldBe(entity.Id.Value);
-        result.SiteName.ShouldBe("Mock Site Name");
-        result.HotWallpapers.ShouldBe("Mock Hot Wallpapers");
-        result.Username.ShouldBe("Mock Username");
-        result.HashedPassword.ShouldBe("Mock Hashed Password");
+        result.ScrapeSettings.SiteName.Value.ShouldBe("Mock Site Name");
+        result.ScrapeSettings.HotWallpapers.Value.ShouldBe("Mock Hot Wallpapers");
+        result.ScrapeSettings.Username.Value.ShouldBe("Mock Username");
+        result.ScrapeSettings.HashedPassword.Value.ShouldBe("Mock Hashed Password");
     }
 
     public void Dispose() => connection.Dispose();
